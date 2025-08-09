@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>Loei Technical College — IT Department</title>
+    <meta
+      name="description"
+      content="Modern, responsive website for the IT Department of Loei Technical College. Overview, subjects, curriculum, student and instructor stats, and more."
+    />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Base extras (works alongside Tailwind) */
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+      /* Focus ring helper for keyboard users when Tailwind isn't configured to show focus by default */
+      .focus-ring:focus-visible {
+        outline: 2px solid #ec4899; /* pink-500 */
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body class="bg-neutral-950 text-neutral-100 antialiased selection:bg-pink-500/20">
+    <header class="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/70 backdrop-blur">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+        <a href="#home" class="group inline-flex items-center gap-2 focus-ring">
+          <span
+            class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-pink-500 to-fuchsia-600 text-white shadow-sm"
+            aria-hidden="true"
+          >IT</span>
+          <div class="flex flex-col leading-none">
+            <span class="text-sm font-semibold tracking-wide text-white" data-i18n="brand.college">Loei Technical College</span>
+            <span class="text-xs text-neutral-400 group-hover:text-neutral-300 transition-colors" data-i18n="brand.department">IT Department</span>
+          </div>
+          <span class="sr-only" data-i18n="a11y.goHome">Go to home</span>
+        </a>
+
+        <nav aria-label="Primary" class="hidden md:flex items-center gap-6">
+          <a href="#overview" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.overview">Overview</a>
+          <a href="#subjects" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.subjects">Subjects</a>
+          <a href="#curriculum" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.curriculum">Curriculum</a>
+          <a href="#students" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.students">Students</a>
+          <a href="#instructors" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.instructors">Instructors</a>
+          <a href="#more" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.more">More</a>
+        </nav>
+
+        <button
+          id="mobile-menu-button"
+          class="md:hidden inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 px-3 py-2 text-neutral-200 hover:bg-white/10 transition focus-ring"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="sr-only" data-i18n="a11y.openMenu">Open main menu</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+
+        <div class="hidden md:flex items-center gap-2">
+          <div id="lang-switch" class="inline-flex rounded-md border border-white/10 bg-white/5 p-0.5">
+            <button type="button" data-lang="th" class="px-3 py-1.5 text-xs font-medium rounded [--active:bg:white/10] focus-ring">TH</button>
+            <button type="button" data-lang="en" class="px-3 py-1.5 text-xs font-medium rounded focus-ring">EN</button>
+          </div>
+        </div>
+      </div>
+
+      <nav id="mobile-menu" aria-label="Mobile" class="md:hidden hidden border-t border-white/5 bg-neutral-950/90 backdrop-blur">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 grid gap-2">
+          <a href="#overview" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.overview">Overview</a>
+          <a href="#subjects" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.subjects">Subjects</a>
+          <a href="#curriculum" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.curriculum">Curriculum</a>
+          <a href="#students" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.students">Students</a>
+          <a href="#instructors" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.instructors">Instructors</a>
+          <a href="#more" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.more">More</a>
+          <div class="pt-2">
+            <div id="lang-switch-mobile" class="inline-flex rounded-md border border-white/10 bg-white/5 p-0.5">
+              <button type="button" data-lang="th" class="px-3 py-1.5 text-xs font-medium rounded focus-ring">TH</button>
+              <button type="button" data-lang="en" class="px-3 py-1.5 text-xs font-medium rounded focus-ring">EN</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section id="home" class="relative overflow-hidden">
+      <div class="absolute inset-0 -z-10">
+        <div class="pointer-events-none absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-pink-500/30 blur-3xl"></div>
+        <div class="pointer-events-none absolute top-40 right-10 h-56 w-56 rounded-full bg-fuchsia-600/20 blur-2xl"></div>
+      </div>
+
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+        <div class="grid items-center gap-10 lg:grid-cols-12">
+          <div class="lg:col-span-7" data-animate="fade-right">
+            <span class="inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-3 py-1 text-xs font-medium text-pink-300">
+              <span data-i18n="hero.badgeLeft">Future-Ready Skills</span>
+              <span class="h-1 w-1 rounded-full bg-pink-400"></span>
+              <span data-i18n="hero.badgeRight">Industry-Focused Curriculum</span>
+            </span>
+            <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+              <span data-i18n="hero.title1">IT Department</span>
+              <span class="block bg-gradient-to-br from-pink-400 via-fuchsia-400 to-pink-600 bg-clip-text text-transparent" data-i18n="hero.title2">
+                Loei Technical College
+              </span>
+            </h1>
+            <p class="mt-5 max-w-2xl text-base leading-relaxed text-neutral-300" data-i18n="hero.lead">
+              Building strong foundations in software development, networking, cybersecurity, and digital innovation with a hands-on, project-based approach.
+            </p>
+            <div class="mt-8 flex flex-wrap items-center gap-3">
+              <a href="#overview" class="focus-ring inline-flex items-center justify-center rounded-md bg-gradient-to-br from-pink-500 to-fuchsia-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-900/20 transition hover:brightness-110" data-i18n="cta.explore">
+                Explore the Department
+              </a>
+              <a href="#subjects" class="focus-ring inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-neutral-100 transition hover:bg-white/10" data-i18n="cta.subjects">
+                Subjects Offered
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5" data-animate="zoom-in">
+            <div class="relative mx-auto aspect-[4/3] w-full max-w-md rounded-2xl border border-white/10 bg-gradient-to-br from-neutral-900 to-neutral-800 p-6 shadow-2xl">
+              <div class="grid grid-cols-3 gap-3">
+                <div class="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
+                  <p class="text-xs text-neutral-400">Focus</p>
+                  <p class="mt-2 text-lg font-semibold text-white">Software</p>
+                </div>
+                <div class="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
+                  <p class="text-xs text-neutral-400">Focus</p>
+                  <p class="mt-2 text-lg font-semibold text-white">Networking</p>
+                </div>
+                <div class="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
+                  <p class="text-xs text-neutral-400">Focus</p>
+                  <p class="mt-2 text-lg font-semibold text-white">CyberSec</p>
+                </div>
+              </div>
+              <div class="mt-4 rounded-xl bg-black/30 p-4 ring-1 ring-white/10">
+                <p class="text-sm text-neutral-300">
+                  Practical labs, real projects, and industry partnerships prepare students for the evolving tech landscape.
+                </p>
+              </div>
+              <div class="pointer-events-none absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-pink-500/20 blur-2xl"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center" data-animate="fade-up">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl" data-i18n="overview.title">
+            Overview of the IT Department
+          </h2>
+          <p class="mt-4 text-neutral-300" data-i18n="overview.body">
+            The IT Department at Loei Technical College equips learners with competencies in programming, network administration, systems analysis, and information security. Our instructors combine academic rigor with hands-on practice, ensuring graduates are job-ready and adaptable.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10" data-animate="fade-up">
+            <h3 class="text-lg font-semibold text-white" data-i18n="overview.missionTitle">Mission</h3>
+            <p class="mt-2 text-sm text-neutral-300" data-i18n="overview.missionBody">
+              Develop competent IT professionals with ethical values, innovation mindset, and collaborative skills for the digital economy.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10" data-animate="fade-up" data-animate-delay="100">
+            <h3 class="text-lg font-semibold text-white" data-i18n="overview.visionTitle">Vision</h3>
+            <p class="mt-2 text-sm text-neutral-300" data-i18n="overview.visionBody">
+              Be a leading regional hub for applied IT education and technical excellence.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10" data-animate="fade-up" data-animate-delay="200">
+            <h3 class="text-lg font-semibold text-white" data-i18n="overview.valuesTitle">Values</h3>
+            <ul class="mt-2 list-disc pl-5 text-sm text-neutral-300">
+              <li data-i18n="overview.values1">Integrity and accountability</li>
+              <li data-i18n="overview.values2">Continuous learning</li>
+              <li data-i18n="overview.values3">Community impact</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="subjects" class="py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center" data-animate="fade-up">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl" data-i18n="subjects.title">Subjects Offered</h2>
+          <p class="mt-4 text-neutral-300" data-i18n="subjects.body">
+            A practical blend of core and elective modules designed to build both breadth and depth across IT domains.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6 ring-1 ring-transparent transition hover:bg-white/10 hover:ring-pink-500/30" data-animate="fade-up">
+            <header class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-white" data-i18n="subjects.programming">Programming</h3>
+              <span class="rounded-full bg-pink-500/20 px-2 py-1 text-xs font-medium text-pink-300" data-i18n="subjects.core">Core</span>
+            </header>
+            <ul class="mt-3 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="subjects.programming1">Python, C/C#, Java fundamentals</li>
+              <li data-i18n="subjects.programming2">Web development basics (HTML, CSS, JS)</li>
+              <li data-i18n="subjects.programming3">Object-Oriented Programming</li>
+            </ul>
+          </article>
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6 ring-1 ring-transparent transition hover:bg-white/10 hover:ring-pink-500/30" data-animate="fade-up" data-animate-delay="50">
+            <header class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-white" data-i18n="subjects.webmobile">Web & Mobile</h3>
+              <span class="rounded-full bg-pink-500/20 px-2 py-1 text-xs font-medium text-pink-300" data-i18n="subjects.elective">Elective</span>
+            </header>
+            <ul class="mt-3 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="subjects.webmobile1">Frontend frameworks fundamentals</li>
+              <li data-i18n="subjects.webmobile2">Responsive UI and accessibility</li>
+              <li data-i18n="subjects.webmobile3">APIs and JSON</li>
+            </ul>
+          </article>
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6 ring-1 ring-transparent transition hover:bg-white/10 hover:ring-pink-500/30" data-animate="fade-up" data-animate-delay="100">
+            <header class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-white" data-i18n="subjects.networking">Networking</h3>
+              <span class="rounded-full bg-pink-500/20 px-2 py-1 text-xs font-medium text-pink-300" data-i18n="subjects.core">Core</span>
+            </header>
+            <ul class="mt-3 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="subjects.networking1">Network fundamentals & routing</li>
+              <li data-i18n="subjects.networking2">Switching and wireless</li>
+              <li data-i18n="subjects.networking3">Network troubleshooting</li>
+            </ul>
+          </article>
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6 ring-1 ring-transparent transition hover:bg-white/10 hover:ring-pink-500/30" data-animate="fade-up">
+            <header class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-white" data-i18n="subjects.cybersec">Cybersecurity</h3>
+              <span class="rounded-full bg-pink-500/20 px-2 py-1 text-xs font-medium text-pink-300" data-i18n="subjects.core">Core</span>
+            </header>
+            <ul class="mt-3 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="subjects.cybersec1">Security principles & risk management</li>
+              <li data-i18n="subjects.cybersec2">System hardening & monitoring</li>
+              <li data-i18n="subjects.cybersec3">Incident response basics</li>
+            </ul>
+          </article>
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6 ring-1 ring-transparent transition hover:bg-white/10 hover:ring-pink-500/30" data-animate="fade-up" data-animate-delay="50">
+            <header class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-white" data-i18n="subjects.databases">Databases</h3>
+              <span class="rounded-full bg-pink-500/20 px-2 py-1 text-xs font-medium text-pink-300" data-i18n="subjects.core">Core</span>
+            </header>
+            <ul class="mt-3 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="subjects.databases1">Relational modeling & SQL</li>
+              <li data-i18n="subjects.databases2">Normalization and transactions</li>
+              <li data-i18n="subjects.databases3">Intro to NoSQL</li>
+            </ul>
+          </article>
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6 ring-1 ring-transparent transition hover:bg-white/10 hover:ring-pink-500/30" data-animate="fade-up" data-animate-delay="100">
+            <header class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-white" data-i18n="subjects.multimedia">Multimedia & IoT</h3>
+              <span class="rounded-full bg-pink-500/20 px-2 py-1 text-xs font-medium text-pink-300" data-i18n="subjects.elective">Elective</span>
+            </header>
+            <ul class="mt-3 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="subjects.multimedia1">Digital media fundamentals</li>
+              <li data-i18n="subjects.multimedia2">Microcontrollers & sensors</li>
+              <li data-i18n="subjects.multimedia3">Prototyping projects</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="curriculum" class="py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center" data-animate="fade-up">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl" data-i18n="curriculum.title">Curriculum Structure</h2>
+          <p class="mt-4 text-neutral-300" data-i18n="curriculum.body">
+            A balanced progression from foundations to specialization, supported by labs, projects, and internships.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6" data-animate="fade-right">
+            <h3 class="text-lg font-semibold text-white" data-i18n="curriculum.year1">Year 1 — Foundations</h3>
+            <ul class="mt-3 list-disc pl-5 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="curriculum.y1_1">Introduction to IT & computer systems</li>
+              <li data-i18n="curriculum.y1_2">Programming basics, Web fundamentals</li>
+              <li data-i18n="curriculum.y1_3">Mathematics for computing</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6" data-animate="fade-up">
+            <h3 class="text-lg font-semibold text-white" data-i18n="curriculum.year2">Year 2 — Core Tracks</h3>
+            <ul class="mt-3 list-disc pl-5 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="curriculum.y2_1">Networking & databases</li>
+              <li data-i18n="curriculum.y2_2">OOP, data structures</li>
+              <li data-i18n="curriculum.y2_3">System administration</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6" data-animate="fade-left">
+            <h3 class="text-lg font-semibold text-white" data-i18n="curriculum.year3">Year 3 — Specialization</h3>
+            <ul class="mt-3 list-disc pl-5 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="curriculum.y3_1">Advanced electives</li>
+              <li data-i18n="curriculum.y3_2">Capstone project</li>
+              <li data-i18n="curriculum.y3_3">Internship / industry placement</li>
+            </ul>
+          </div>
+        </div>
+
+         Semester timeline 
+          <div class="mt-12 rounded-2xl border border-white/10 bg-gradient-to-br from-neutral-900 to-neutral-800 p-6">
+          <ol class="relative ml-3 border-l border-white/10 pl-6">
+            <li class="mb-8" data-animate="fade-up">
+              <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full bg-gradient-to-br from-pink-500 to-fuchsia-600 ring-2 ring-neutral-900"></div>
+                <h4 class="text-base font-semibold text-white" data-i18n="curriculum.s12">Semester 1–2</h4>
+                <p class="mt-1 text-sm text-neutral-300" data-i18n="curriculum.s12_body">Core foundations, lab safety, programming basics, and web fundamentals.</p>
+            </li>
+            <li class="mb-8" data-animate="fade-up" data-animate-delay="100">
+              <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full bg-gradient-to-br from-pink-500 to-fuchsia-600 ring-2 ring-neutral-900"></div>
+                <h4 class="text-base font-semibold text-white" data-i18n="curriculum.s34">Semester 3–4</h4>
+                <p class="mt-1 text-sm text-neutral-300" data-i18n="curriculum.s34_body">Networking, databases, OOP, and systems administration with lab projects.</p>
+            </li>
+            <li data-animate="fade-up" data-animate-delay="200">
+              <div class="absolute -left-2.5 mt-1 h-5 w-5 rounded-full bg-gradient-to-br from-pink-500 to-fuchsia-600 ring-2 ring-neutral-900"></div>
+                <h4 class="text-base font-semibold text-white" data-i18n="curriculum.s56">Semester 5–6</h4>
+                <p class="mt-1 text-sm text-neutral-300" data-i18n="curriculum.s56_body">Specialization electives, internship, and capstone with industry mentorship.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="students" class="py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid items-stretch gap-6 lg:grid-cols-2">
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-8" data-animate="fade-up">
+            <h3 class="text-2xl font-bold text-white" data-i18n="students.title">Number of Students</h3>
+            <p class="mt-2 text-sm text-neutral-300" data-i18n="students.body">
+              A vibrant community of learners engaged in labs, workshops, and real-world projects.
+            </p>
+            <div class="mt-6 flex items-end gap-4">
+              <span class="text-5xl font-extrabold bg-gradient-to-br from-pink-400 to-fuchsia-500 bg-clip-text text-transparent">
+                <span class="count" data-count="320">0</span>
+              </span>
+              <span class="mb-2 text-neutral-400" data-i18n="students.unit">current students</span>
+            </div>
+            <div class="mt-6 grid grid-cols-2 gap-3">
+              <div class="rounded-xl bg-black/30 p-4 ring-1 ring-white/10">
+                <p class="text-xs text-neutral-400" data-i18n="students.clubs">Clubs & Activities</p>
+                <p class="mt-1 text-lg font-semibold text-white">5+</p>
+              </div>
+              <div class="rounded-xl bg-black/30 p-4 ring-1 ring-white/10">
+                <p class="text-xs text-neutral-400" data-i18n="students.projects">Annual Projects</p>
+                <p class="mt-1 text-lg font-semibold text-white">40+</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="instructors" class="rounded-2xl border border-white/10 bg-white/5 p-8" data-animate="fade-up" data-animate-delay="100">
+            <h3 class="text-2xl font-bold text-white" data-i18n="instructors.title">Number of Instructors</h3>
+            <p class="mt-2 text-sm text-neutral-300" data-i18n="instructors.body">
+              Experienced educators and practitioners guiding students through modern IT practices.
+            </p>
+            <div class="mt-6 flex items-end gap-4">
+              <span class="text-5xl font-extrabold bg-gradient-to-br from-pink-400 to-fuchsia-500 bg-clip-text text-transparent">
+                <span class="count" data-count="18">0</span>
+              </span>
+              <span class="mb-2 text-neutral-400" data-i18n="instructors.unit">instructors</span>
+            </div>
+            <div class="mt-6 grid grid-cols-2 gap-3">
+              <div class="rounded-xl bg-black/30 p-4 ring-1 ring-white/10">
+                <p class="text-xs text-neutral-400" data-i18n="instructors.certs">Industry Certs</p>
+                <p class="mt-1 text-lg font-semibold text-white">CCNA, CompTIA, AWS</p>
+              </div>
+              <div class="rounded-xl bg-black/30 p-4 ring-1 ring-white/10">
+                <p class="text-xs text-neutral-400" data-i18n="instructors.experience">Avg. Experience</p>
+                <p class="mt-1 text-lg font-semibold text-white">8+ years</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+         Note: You can adjust data-count values above as needed 
+      </div>
+    </section>
+
+    <section id="more" class="py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center" data-animate="fade-up">
+          <h2 class="text-3xl font-bold text-white sm:text-4xl" data-i18n="more.title">Other Essential Information</h2>
+          <p class="mt-4 text-neutral-300" data-i18n="more.body">
+            Facilities, admissions, partnerships, and contact details for the IT Department.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6" data-animate="fade-up">
+            <h3 class="text-lg font-semibold text-white" data-i18n="more.facilities">Facilities</h3>
+            <ul class="mt-3 list-disc pl-5 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="more.facilities1">Dedicated computer labs with modern hardware</li>
+              <li data-i18n="more.facilities2">Networking lab with routers and switches</li>
+              <li data-i18n="more.facilities3">Project studio for capstone development</li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6" data-animate="fade-up" data-animate-delay="100">
+            <h3 class="text-lg font-semibold text-white" data-i18n="more.admissions">Admissions</h3>
+            <ul class="mt-3 list-disc pl-5 text-sm text-neutral-300 space-y-1.5">
+              <li data-i18n="more.admissions1">Application, interview, and placement assessment</li>
+              <li data-i18n="more.admissions2">Scholarships and financial aid available</li>
+              <li data-i18n="more.admissions3">Orientation and academic advising for newcomers</li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6" data-animate="fade-up" data-animate-delay="200">
+            <h3 class="text-lg font-semibold text-white" data-i18n="more.contact">Contact</h3>
+            <div class="mt-3 text-sm text-neutral-300 space-y-1.5">
+              <p data-i18n="more.email">Email: itdept@loei-technical.example</p>
+              <p data-i18n="more.phone">Phone: +66 42-000-000</p>
+              <p data-i18n="more.hours">Office Hours: Mon–Fri, 08:30–16:30</p>
+              <p data-i18n="more.address">Address: Loei Technical College, Loei, Thailand</p>
+            </div>
+          </div>
+        </div>
+
+         CTA Banner 
+          <div class="mt-12 overflow-hidden rounded-2xl border border-pink-500/30 bg-gradient-to-br from-pink-500/10 to-fuchsia-600/10 p-8 ring-1 ring-inset ring-pink-500/20" data-animate="fade-up">
+          <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+            <div>
+                <h3 class="text-xl font-bold text-white" data-i18n="cta.visit">Visit Our Department</h3>
+                <p class="mt-1 text-sm text-neutral-300" data-i18n="cta.visitBody">
+                  Schedule a tour, meet our instructors, and explore labs and student projects.
+                </p>
+            </div>
+              <a href="#overview" class="focus-ring inline-flex items-center justify-center rounded-md bg-gradient-to-br from-pink-500 to-fuchsia-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-900/20 transition hover:brightness-110" data-i18n="cta.learnMore">
+                Learn More
+              </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-10">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col-reverse items-center justify-between gap-6 sm:flex-row">
+        <p class="text-xs text-neutral-400">
+          © <span id="year"></span> <span data-i18n="footer.brand">Loei Technical College — IT Department</span>. <span data-i18n="footer.rights">All rights reserved.</span>
+        </p>
+        <div class="flex items-center gap-3">
+          <a href="#home" class="focus-ring inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-neutral-200 hover:bg-white/10 transition" data-i18n="footer.backToTop">Back to top</a>
+        </div>
+      </div>
+    </footer>
+
+    <button
+      id="toTop"
+      class="fixed bottom-5 right-5 hidden rounded-full bg-gradient-to-br from-pink-500 to-fuchsia-600 p-3 text-white shadow-lg shadow-pink-900/30 transition hover:brightness-110 focus-ring"
+      aria-label="Scroll to top"
+      title="Scroll to top"
+    >
+      ↑
+    </button>
+
+    <script>
+      (function () {
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+          menuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('hidden') === false;
+            menuBtn.setAttribute('aria-expanded', String(isOpen));
+          });
+          // Close on link click
+          mobileMenu.querySelectorAll('a').forEach((a) => {
+            a.addEventListener('click', () => {
+              mobileMenu.classList.add('hidden');
+              menuBtn.setAttribute('aria-expanded', 'false');
+            });
+          });
+        }
+
+        // Scroll-to-top button
+        const toTop = document.getElementById('toTop');
+        window.addEventListener('scroll', () => {
+          const y = window.scrollY || window.pageYOffset;
+          if (y > 400) {
+            toTop.classList.remove('hidden');
+          } else {
+            toTop.classList.add('hidden');
+          }
+        });
+        toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Year in footer
+        document.getElementById('year').textContent = String(new Date().getFullYear());
+
+        // Animation presets (initial and visible transforms)
+        const presets = {
+          'fade-up':   { from: ['opacity-0', 'translate-y-6'], to: ['opacity-100', 'translate-y-0'] },
+          'fade-down': { from: ['opacity-0', '-translate-y-6'], to: ['opacity-100', 'translate-y-0'] },
+          'fade-left': { from: ['opacity-0', 'translate-x-6'], to: ['opacity-100', 'translate-x-0'] },
+          'fade-right':{ from: ['opacity-0', '-translate-x-6'], to: ['opacity-100', 'translate-x-0'] },
+          'fade':      { from: ['opacity-0'], to: ['opacity-100'] },
+          'zoom-in':   { from: ['opacity-0', 'scale-95'], to: ['opacity-100', 'scale-100'] },
+        };
+
+        function applyInitial(el, preset) {
+          const base = ['transition-all', 'duration-700', 'ease-out', 'will-change-transform', 'will-change-opacity'];
+          el.classList.add(...base, ...preset.from);
+        }
+
+        function show(el, preset, delay) {
+          if (delay) {
+            el.style.transitionDelay = delay + 'ms';
+          }
+          // Swap classes to "to" state
+          preset.from.forEach((c) => el.classList.remove(c));
+          preset.to.forEach((c) => el.classList.add(c));
+        }
+
+        function hide(el, preset) {
+          el.style.transitionDelay = '0ms';
+          preset.to.forEach((c) => el.classList.remove(c));
+          preset.from.forEach((c) => el.classList.add(c));
+        }
+
+        // Observe animated elements (re-animate on scroll up/down)
+        const animated = Array.from(document.querySelectorAll('[data-animate]'));
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const el = entry.target;
+            const type = el.getAttribute('data-animate') || 'fade-up';
+            const delay = parseInt(el.getAttribute('data-animate-delay') || '0', 10);
+            const preset = presets[type] || presets['fade-up'];
+
+            if (prefersReduced) {
+              // If user prefers reduced motion, just make visible
+              el.classList.remove(...(preset.from || []));
+              el.classList.add(...(preset.to || []), 'opacity-100');
+              return;
+            }
+
+            if (entry.isIntersecting) {
+              show(el, preset, delay);
+            } else {
+              // Remove when out of view so it re-animates when scrolled back
+              hide(el, preset);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+
+        animated.forEach((el) => {
+          const type = el.getAttribute('data-animate') || 'fade-up';
+          const preset = presets[type] || presets['fade-up'];
+          applyInitial(el, preset);
+          io.observe(el);
+        });
+
+        // Simple count-up when visible
+        const counters = document.querySelectorAll('.count[data-count]');
+        const counterObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            counterObserver.unobserve(el);
+
+            const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+            const duration = 1200; // ms
+            const start = performance.now();
+            const from = 0;
+
+            function tick(now) {
+              const t = Math.min(1, (now - start) / duration);
+              const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+              const val = Math.round(from + (target - from) * eased);
+              el.textContent = String(val);
+              if (t < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          });
+        }, { threshold: 0.6 });
+
+        counters.forEach((c) => counterObserver.observe(c));
+
+        // Scroll spy for nav links
+        const sections = ['overview', 'subjects', 'curriculum', 'students', 'instructors', 'more']
+          .map((id) => document.getElementById(id))
+          .filter(Boolean);
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const spy = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const id = entry.target.id;
+            if (entry.isIntersecting) {
+              navLinks.forEach((a) => {
+                const href = a.getAttribute('href') || '';
+                if (href === '#' + id) {
+                  a.classList.add('text-pink-400');
+                } else {
+                  a.classList.remove('text-pink-400');
+                }
+              });
+            }
+          });
+        }, { threshold: 0.6 });
+
+        sections.forEach((s) => spy.observe(s));
+
+        // Simple i18n with TH default
+        const translations = {
+          en: {
+            'brand.college': 'Loei Technical College',
+            'brand.department': 'IT Department',
+            'a11y.goHome': 'Go to home',
+            'a11y.openMenu': 'Open main menu',
+            'nav.overview': 'Overview',
+            'nav.subjects': 'Subjects',
+            'nav.curriculum': 'Curriculum',
+            'nav.students': 'Students',
+            'nav.instructors': 'Instructors',
+            'nav.more': 'More',
+            'hero.badgeLeft': 'Future-Ready Skills',
+            'hero.badgeRight': 'Industry-Focused Curriculum',
+            'hero.title1': 'IT Department',
+            'hero.title2': 'Loei Technical College',
+            'hero.lead': 'Building strong foundations in software development, networking, cybersecurity, and digital innovation with a hands-on, project-based approach.',
+            'cta.explore': 'Explore the Department',
+            'cta.subjects': 'Subjects Offered',
+            'overview.title': 'Overview of the IT Department',
+            'overview.body': 'The IT Department at Loei Technical College equips learners with competencies in programming, network administration, systems analysis, and information security. Our instructors combine academic rigor with hands-on practice, ensuring graduates are job-ready and adaptable.',
+            'overview.missionTitle': 'Mission',
+            'overview.missionBody': 'Develop competent IT professionals with ethical values, innovation mindset, and collaborative skills for the digital economy.',
+            'overview.visionTitle': 'Vision',
+            'overview.visionBody': 'Be a leading regional hub for applied IT education and technical excellence.',
+            'overview.valuesTitle': 'Values',
+            'overview.values1': 'Integrity and accountability',
+            'overview.values2': 'Continuous learning',
+            'overview.values3': 'Community impact',
+            'subjects.title': 'Subjects Offered',
+            'subjects.body': 'A practical blend of core and elective modules designed to build both breadth and depth across IT domains.',
+            'subjects.programming': 'Programming',
+            'subjects.core': 'Core',
+            'subjects.programming1': 'Python, C/C#, Java fundamentals',
+            'subjects.programming2': 'Web development basics (HTML, CSS, JS)',
+            'subjects.programming3': 'Object-Oriented Programming',
+            'subjects.webmobile': 'Web & Mobile',
+            'subjects.elective': 'Elective',
+            'subjects.webmobile1': 'Frontend frameworks fundamentals',
+            'subjects.webmobile2': 'Responsive UI and accessibility',
+            'subjects.webmobile3': 'APIs and JSON',
+            'subjects.networking': 'Networking',
+            'subjects.networking1': 'Network fundamentals & routing',
+            'subjects.networking2': 'Switching and wireless',
+            'subjects.networking3': 'Network troubleshooting',
+            'subjects.cybersec': 'Cybersecurity',
+            'subjects.cybersec1': 'Security principles & risk management',
+            'subjects.cybersec2': 'System hardening & monitoring',
+            'subjects.cybersec3': 'Incident response basics',
+            'subjects.databases': 'Databases',
+            'subjects.databases1': 'Relational modeling & SQL',
+            'subjects.databases2': 'Normalization and transactions',
+            'subjects.databases3': 'Intro to NoSQL',
+            'subjects.multimedia': 'Multimedia & IoT',
+            'subjects.multimedia1': 'Digital media fundamentals',
+            'subjects.multimedia2': 'Microcontrollers & sensors',
+            'subjects.multimedia3': 'Prototyping projects',
+            'curriculum.title': 'Curriculum Structure',
+            'curriculum.body': 'A balanced progression from foundations to specialization, supported by labs, projects, and internships.',
+            'curriculum.year1': 'Year 1 — Foundations',
+            'curriculum.y1_1': 'Introduction to IT & computer systems',
+            'curriculum.y1_2': 'Programming basics, Web fundamentals',
+            'curriculum.y1_3': 'Mathematics for computing',
+            'curriculum.year2': 'Year 2 — Core Tracks',
+            'curriculum.y2_1': 'Networking & databases',
+            'curriculum.y2_2': 'OOP, data structures',
+            'curriculum.y2_3': 'System administration',
+            'curriculum.year3': 'Year 3 — Specialization',
+            'curriculum.y3_1': 'Advanced electives',
+            'curriculum.y3_2': 'Capstone project',
+            'curriculum.y3_3': 'Internship / industry placement',
+            'curriculum.s12': 'Semester 1–2',
+            'curriculum.s12_body': 'Core foundations, lab safety, programming basics, and web fundamentals.',
+            'curriculum.s34': 'Semester 3–4',
+            'curriculum.s34_body': 'Networking, databases, OOP, and systems administration with lab projects.',
+            'curriculum.s56': 'Semester 5–6',
+            'curriculum.s56_body': 'Specialization electives, internship, and capstone with industry mentorship.',
+            'students.title': 'Number of Students',
+            'students.body': 'A vibrant community of learners engaged in labs, workshops, and real-world projects.',
+            'students.unit': 'current students',
+            'students.clubs': 'Clubs & Activities',
+            'students.projects': 'Annual Projects',
+            'instructors.title': 'Number of Instructors',
+            'instructors.body': 'Experienced educators and practitioners guiding students through modern IT practices.',
+            'instructors.unit': 'instructors',
+            'instructors.certs': 'Industry Certs',
+            'instructors.experience': 'Avg. Experience',
+            'more.title': 'Other Essential Information',
+            'more.body': 'Facilities, admissions, partnerships, and contact details for the IT Department.',
+            'more.facilities': 'Facilities',
+            'more.facilities1': 'Dedicated computer labs with modern hardware',
+            'more.facilities2': 'Networking lab with routers and switches',
+            'more.facilities3': 'Project studio for capstone development',
+            'more.admissions': 'Admissions',
+            'more.admissions1': 'Application, interview, and placement assessment',
+            'more.admissions2': 'Scholarships and financial aid available',
+            'more.admissions3': 'Orientation and academic advising for newcomers',
+            'more.contact': 'Contact',
+            'more.email': 'Email: itdept@loei-technical.example',
+            'more.phone': 'Phone: +66 42-000-000',
+            'more.hours': 'Office Hours: Mon–Fri, 08:30–16:30',
+            'more.address': 'Address: Loei Technical College, Loei, Thailand',
+            'cta.visit': 'Visit Our Department',
+            'cta.visitBody': 'Schedule a tour, meet our instructors, and explore labs and student projects.',
+            'cta.learnMore': 'Learn More',
+            'footer.brand': 'Loei Technical College — IT Department',
+            'footer.rights': 'All rights reserved.',
+            'footer.backToTop': 'Back to top'
+          },
+          th: {
+            'brand.college': 'วิทยาลัยเทคนิคเลย',
+            'brand.department': 'แผนกวิชาเทคโนโลยีสารสนเทศ',
+            'a11y.goHome': 'ไปที่หน้าหลัก',
+            'a11y.openMenu': 'เปิดเมนูหลัก',
+            'nav.overview': 'ภาพรวม',
+            'nav.subjects': 'รายวิชา',
+            'nav.curriculum': 'โครงสร้างหลักสูตร',
+            'nav.students': 'นักเรียน',
+            'nav.instructors': 'ครูผู้สอน',
+            'nav.more': 'ข้อมูลอื่น ๆ',
+            'hero.badgeLeft': 'ทักษะพร้อมอนาคต',
+            'hero.badgeRight': 'หลักสูตรเน้นอุตสาหกรรม',
+            'hero.title1': 'แผนกเทคโนโลยีสารสนเทศ',
+            'hero.title2': 'วิทยาลัยเทคนิคเลย',
+            'hero.lead': 'วางรากฐานที่แข็งแกร่งด้านพัฒนาซอฟต์แวร์ เครือข่าย ความมั่นคงปลอดภัยไซเบอร์ และนวัตกรรมดิจิทัล ผ่านการปฏิบัติจริงและโครงงาน',
+            'cta.explore': 'สำรวจแผนกวิชา',
+            'cta.subjects': 'รายวิชาที่เปิดสอน',
+            'overview.title': 'ภาพรวมแผนกเทคโนโลยีสารสนเทศ',
+            'overview.body': 'แผนกเทคโนโลยีสารสนเทศมุ่งพัฒนาผู้เรียนให้มีสมรรถนะด้านการเขียนโปรแกรม การดูแลเครือข่าย การวิเคราะห์ระบบ และความปลอดภัยสารสนเทศ โดยผสานความเข้มข้นทางวิชาการกับการปฏิบัติจริงเพื่อพร้อมทำงาน',
+            'overview.missionTitle': 'พันธกิจ',
+            'overview.missionBody': 'พัฒนาบุคลากรไอทีให้มีความสามารถ คุณธรรม ความคิดสร้างสรรค์ และทักษะการทำงานร่วมกันสำหรับเศรษฐกิจดิจิทัล',
+            'overview.visionTitle': 'วิสัยทัศน์',
+            'overview.visionBody': 'เป็นศูนย์กลางการเรียนรู้ด้านไอทีเชิงประยุกต์ชั้นนำของภูมิภาค',
+            'overview.valuesTitle': 'ค่านิยม',
+            'overview.values1': 'ซื่อสัตย์และรับผิดชอบ',
+            'overview.values2': 'เรียนรู้อย่างต่อเนื่อง',
+            'overview.values3': 'สร้างผลกระทบต่อชุมชน',
+            'subjects.title': 'รายวิชาที่เปิดสอน',
+            'subjects.body': 'ผสมผสานวิชาแกนและวิชาเลือกอย่างเหมาะสม เพื่อสร้างความกว้างและความลึกในสาขาไอที',
+            'subjects.programming': 'การเขียนโปรแกรม',
+            'subjects.core': 'วิชาแกน',
+            'subjects.programming1': 'พื้นฐาน Python, C/C#, Java',
+            'subjects.programming2': 'พื้นฐานพัฒนาเว็บ (HTML, CSS, JS)',
+            'subjects.programming3': 'เชิงวัตถุ (OOP)',
+            'subjects.webmobile': 'เว็บและโมบายล์',
+            'subjects.elective': 'วิชาเลือก',
+            'subjects.webmobile1': 'พื้นฐานเฟรมเวิร์กฝั่งหน้าเว็บ',
+            'subjects.webmobile2': 'ส่วนติดต่อผู้ใช้ตอบสนองและการเข้าถึง',
+            'subjects.webmobile3': 'API และ JSON',
+            'subjects.networking': 'เครือข่ายคอมพิวเตอร์',
+            'subjects.networking1': 'พื้นฐานเครือข่ายและการเราท์ติ้ง',
+            'subjects.networking2': 'สวิตชิ่งและไร้สาย',
+            'subjects.networking3': 'การแก้ปัญหาเครือข่าย',
+            'subjects.cybersec': 'ความมั่นคงปลอดภัยไซเบอร์',
+            'subjects.cybersec1': 'หลักการความปลอดภัยและการบริหารความเสี่ยง',
+            'subjects.cybersec2': 'การเสริมความมั่นคงและการเฝ้าระวังระบบ',
+            'subjects.cybersec3': 'พื้นฐานการตอบสนองเหตุการณ์',
+            'subjects.databases': 'ฐานข้อมูล',
+            'subjects.databases1': 'การออกแบบเชิงสัมพันธ์และ SQL',
+            'subjects.databases2': 'นอร์มัลไลซ์และทรานแซกชัน',
+            'subjects.databases3': 'รู้จัก NoSQL',
+            'subjects.multimedia': 'สื่อดิจิทัลและ IoT',
+            'subjects.multimedia1': 'พื้นฐานสื่อดิจิทัล',
+            'subjects.multimedia2': 'ไมโครคอนโทรลเลอร์และเซนเซอร์',
+            'subjects.multimedia3': 'โครงงานต้นแบบ',
+            'curriculum.title': 'โครงสร้างหลักสูตร',
+            'curriculum.body': 'เรียนรู้อย่างเป็นลำดับตั้งแต่พื้นฐานสู่การเชี่ยวชาญ พร้อมห้องปฏิบัติการ โครงงาน และสหกิจศึกษา',
+            'curriculum.year1': 'ปีที่ 1 — พื้นฐาน',
+            'curriculum.y1_1': 'แนะนำไอทีและระบบคอมพิวเตอร์',
+            'curriculum.y1_2': 'พื้นฐานการเขียนโปรแกรมและเว็บ',
+            'curriculum.y1_3': 'คณิตศาสตร์สำหรับคอมพิวเตอร์',
+            'curriculum.year2': 'ปีที่ 2 — แกนหลัก',
+            'curriculum.y2_1': 'เครือข่ายและฐานข้อมูล',
+            'curriculum.y2_2': 'OOP และโครงสร้างข้อมูล',
+            'curriculum.y2_3': 'ดูแลระบบคอมพิวเตอร์',
+            'curriculum.year3': 'ปีที่ 3 — ความเชี่ยวชาญ',
+            'curriculum.y3_1': 'วิชาเลือกขั้นสูง',
+            'curriculum.y3_2': 'โครงงานสำเร็จการศึกษา',
+            'curriculum.y3_3': 'ฝึกงาน / สหกิจศึกษา',
+            'curriculum.s12': 'ภาคเรียนที่ 1–2',
+            'curriculum.s12_body': 'พื้นฐานหลัก ความปลอดภัยในห้องแลบ การเขียนโปรแกรม และพื้นฐานเว็บ',
+            'curriculum.s34': 'ภาคเรียนที่ 3–4',
+            'curriculum.s34_body': 'เครือข่าย ฐานข้อมูล OOP และดูแลระบบ พร้อมโครงงาน',
+            'curriculum.s56': 'ภาคเรียนที่ 5–6',
+            'curriculum.s56_body': 'วิชาเลือกเฉพาะทาง ฝึกงาน และโครงงาน พร้อมพี่เลี้ยงจากอุตสาหกรรม',
+            'students.title': 'จำนวนนักเรียน',
+            'students.body': 'ชุมชนแห่งการเรียนรู้ที่มีชีวิตชีวา ผ่านแลบ เวิร์กช็อป และโครงงานจริง',
+            'students.unit': 'นักเรียนปัจจุบัน',
+            'students.clubs': 'ชมรมและกิจกรรม',
+            'students.projects': 'โครงงานประจำปี',
+            'instructors.title': 'จำนวนครูผู้สอน',
+            'instructors.body': 'ครูและผู้เชี่ยวชาญที่มีประสบการณ์ นำทางนักเรียนสู่แนวทางไอทีสมัยใหม่',
+            'instructors.unit': 'ครูผู้สอน',
+            'instructors.certs': 'ใบรับรองวิชาชีพ',
+            'instructors.experience': 'ประสบการณ์เฉลี่ย',
+            'more.title': 'ข้อมูลสำคัญอื่น ๆ',
+            'more.body': 'สิ่งอำนวยความสะดวก การรับสมัคร ความร่วมมือ และข้อมูลติดต่อของแผนก',
+            'more.facilities': 'สิ่งอำนวยความสะดวก',
+            'more.facilities1': 'ห้องคอมพิวเตอร์พร้อมอุปกรณ์ทันสมัย',
+            'more.facilities2': 'แลบเครือข่ายพร้อมเราเตอร์และสวิตช์',
+            'more.facilities3': 'สตูดิโอสำหรับพัฒนาโครงงาน',
+            'more.admissions': 'การรับสมัคร',
+            'more.admissions1': 'ยื่นใบสมัคร สัมภาษณ์ และประเมินความพร้อม',
+            'more.admissions2': 'ทุนการศึกษาและการสนับสนุนทางการเงิน',
+            'more.admissions3': 'ปฐมนิเทศและแนะแนวการเรียนสำหรับผู้เข้าใหม่',
+            'more.contact': 'ติดต่อ',
+            'more.email': 'อีเมล: itdept@loei-technical.example',
+            'more.phone': 'โทร: +66 42-000-000',
+            'more.hours': 'เวลาทำการ: จันทร์–ศุกร์ 08:30–16:30',
+            'more.address': 'ที่อยู่: วิทยาลัยเทคนิคเลย จังหวัดเลย',
+            'cta.visit': 'เยี่ยมชมแผนกของเรา',
+            'cta.visitBody': 'นัดเยี่ยมชม พบครูผู้สอน และสำรวจห้องแลบกับผลงานนักเรียน',
+            'cta.learnMore': 'ดูเพิ่มเติม',
+            'footer.brand': 'วิทยาลัยเทคนิคเลย — แผนกเทคโนโลยีสารสนเทศ',
+            'footer.rights': 'สงวนลิขสิทธิ์ทั้งหมด',
+            'footer.backToTop': 'กลับไปด้านบน'
+          }
+        };
+
+        function applyTranslations(lang) {
+          const nodes = document.querySelectorAll('[data-i18n]');
+          nodes.forEach((el) => {
+            const key = el.getAttribute('data-i18n');
+            const txt = (translations[lang] && translations[lang][key]) || translations.th[key] || translations.en[key];
+            if (typeof txt === 'string') {
+              el.textContent = txt;
+            }
+          });
+          document.documentElement.setAttribute('lang', lang);
+        }
+
+        function syncActiveButtons(lang) {
+          ['lang-switch', 'lang-switch-mobile'].forEach((id) => {
+            const wrap = document.getElementById(id);
+            if (!wrap) return;
+            wrap.querySelectorAll('button[data-lang]').forEach((btn) => {
+              const isActive = btn.getAttribute('data-lang') === lang;
+              btn.classList.toggle('bg-white/10', isActive);
+              btn.classList.toggle('text-white', isActive);
+              btn.classList.toggle('text-neutral-300', !isActive);
+            });
+          });
+        }
+
+        function setLang(lang) {
+          const next = (lang === 'th' || lang === 'en') ? lang : 'th';
+          localStorage.setItem('lang', next);
+          applyTranslations(next);
+          syncActiveButtons(next);
+        }
+
+        function attachLangSwitch(id) {
+          const wrap = document.getElementById(id);
+          if (!wrap) return;
+          wrap.addEventListener('click', (e) => {
+            const target = e.target;
+            if (!(target instanceof HTMLElement)) return;
+            const btn = target.closest('button[data-lang]');
+            if (!btn) return;
+            const lang = btn.getAttribute('data-lang');
+            if (lang) setLang(lang);
+          });
+        }
+
+        attachLangSwitch('lang-switch');
+        attachLangSwitch('lang-switch-mobile');
+        const savedLang = localStorage.getItem('lang') || 'th';
+        setLang(savedLang);
+      })();
+    </script>
+  </body>
+</html>
