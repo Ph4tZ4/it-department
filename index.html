@@ -24,74 +24,325 @@
         outline: 2px solid #ec4899; /* pink-500 */
         outline-offset: 2px;
       }
+
+      /* Animated background elements */
+      .floating-particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 20s infinite linear;
+      }
+
+      .particle:nth-child(1) {
+        width: 200px;
+        height: 200px;
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 25s;
+      }
+
+      .particle:nth-child(2) {
+        width: 150px;
+        height: 150px;
+        top: 60%;
+        left: 80%;
+        animation-delay: -5s;
+        animation-duration: 30s;
+      }
+
+      .particle:nth-child(3) {
+        width: 100px;
+        height: 100px;
+        top: 80%;
+        left: 20%;
+        animation-delay: -10s;
+        animation-duration: 35s;
+      }
+
+      .particle:nth-child(4) {
+        width: 120px;
+        height: 120px;
+        top: 30%;
+        left: 70%;
+        animation-delay: -15s;
+        animation-duration: 28s;
+      }
+
+      .particle:nth-child(5) {
+        width: 80px;
+        height: 80px;
+        top: 70%;
+        left: 60%;
+        animation-delay: -8s;
+        animation-duration: 32s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px) rotate(0deg);
+          opacity: 0.3;
+        }
+        25% {
+          opacity: 0.6;
+        }
+        50% {
+          transform: translateY(-100px) rotate(180deg);
+          opacity: 0.8;
+        }
+        75% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: translateY(0px) rotate(360deg);
+          opacity: 0.3;
+        }
+      }
+
+      /* Moving gradient background */
+      .moving-gradient {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          rgba(139, 92, 246, 0.03) 0%,
+          rgba(236, 72, 153, 0.03) 25%,
+          rgba(168, 85, 247, 0.03) 50%,
+          rgba(236, 72, 153, 0.03) 75%,
+          rgba(139, 92, 246, 0.03) 100%
+        );
+        background-size: 400% 400%;
+        animation: gradientMove 15s ease infinite;
+        z-index: -2;
+      }
+
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Grid pattern overlay */
+      .grid-pattern {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(rgba(236, 72, 153, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(236, 72, 153, 0.02) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: gridMove 20s linear infinite;
+        z-index: -3;
+      }
+
+      @keyframes gridMove {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(50px, 50px);
+        }
+      }
+
+      /* Glowing orbs */
+      .glow-orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(40px);
+        opacity: 0.4;
+        animation: glowPulse 8s ease-in-out infinite;
+      }
+
+      .glow-orb:nth-child(1) {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%);
+        top: 20%;
+        left: 15%;
+        animation-delay: 0s;
+      }
+
+      .glow-orb:nth-child(2) {
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+        top: 70%;
+        right: 20%;
+        animation-delay: -4s;
+      }
+
+      .glow-orb:nth-child(3) {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+        bottom: 30%;
+        left: 60%;
+        animation-delay: -8s;
+      }
+
+      @keyframes glowPulse {
+        0%, 100% {
+          transform: scale(1);
+          opacity: 0.4;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.6;
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .particle {
+          animation-duration: 15s;
+        }
+        .moving-gradient {
+          animation-duration: 20s;
+        }
+        .grid-pattern {
+          animation-duration: 30s;
+        }
+      }
+
+      /* Reduced motion support */
+      @media (prefers-reduced-motion: reduce) {
+        .particle,
+        .moving-gradient,
+        .grid-pattern,
+        .glow-orb {
+          animation: none;
+        }
+      }
+
+      /* Interactive hover effects */
+      .section-card {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .section-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.1), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .section-card:hover::before {
+        left: 100%;
+      }
+
+      .section-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(236, 72, 153, 0.1);
+      }
+
+      /* Parallax effect for background elements */
+      .parallax-bg {
+        will-change: transform;
+      }
+
+      /* Enhanced glow effects */
+      .enhanced-glow {
+        filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.3));
+        transition: filter 0.3s ease;
+      }
+
+      .enhanced-glow:hover {
+        filter: drop-shadow(0 0 30px rgba(236, 72, 153, 0.5));
+      }
+
+      /* Floating animation for cards */
+      .float-card {
+        animation: floatCard 6s ease-in-out infinite;
+      }
+
+      @keyframes floatCard {
+        0%, 100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Gradient text animation */
+      .gradient-text {
+        background: linear-gradient(45deg, #ec4899, #a855f7, #ec4899);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradientText 3s ease infinite;
+      }
+
+      @keyframes gradientText {
+        0%, 100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
     </style>
   </head>
-  <body class="bg-neutral-950 text-neutral-100 antialiased selection:bg-pink-500/20">
-    <header class="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/70 backdrop-blur">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
-        <a href="#home" class="group inline-flex items-center gap-2 focus-ring">
-          <span
-            class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-pink-500 to-fuchsia-600 text-white shadow-sm"
-            aria-hidden="true"
-          >IT</span>
-          <div class="flex flex-col leading-none">
-            <span class="text-sm font-semibold tracking-wide text-white" data-i18n="brand.college">Loei Technical College</span>
-            <span class="text-xs text-neutral-400 group-hover:text-neutral-300 transition-colors" data-i18n="brand.department">IT Department</span>
-          </div>
-          <span class="sr-only" data-i18n="a11y.goHome">Go to home</span>
-        </a>
+  <body class="bg-neutral-950 text-white antialiased pt-16">
+    <!-- Animated Background Elements -->
+    <div class="moving-gradient"></div>
+    <div class="grid-pattern"></div>
+    
+    <!-- Floating Particles -->
+    <div class="floating-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    
+    <!-- Glowing Orbs -->
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
 
-        <nav aria-label="Primary" class="hidden md:flex items-center gap-6">
-          <a href="#overview" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.overview">Overview</a>
-          <a href="#subjects" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.subjects">Subjects</a>
-          <a href="#curriculum" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.curriculum">Curriculum</a>
-          <a href="#students" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.students">Students</a>
-          <a href="#instructors" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.instructors">Instructors</a>
-          <a href="#more" class="nav-link text-sm text-neutral-300 hover:text-white transition-colors focus-ring" data-i18n="nav.more">More</a>
-        </nav>
-
-        <button
-          id="mobile-menu-button"
-          class="md:hidden inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 px-3 py-2 text-neutral-200 hover:bg-white/10 transition focus-ring"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
-        >
-          <span class="sr-only" data-i18n="a11y.openMenu">Open main menu</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-
-        <div class="hidden md:flex items-center gap-2">
-          <div id="lang-switch" class="inline-flex rounded-md border border-white/10 bg-white/5 p-0.5">
-            <button type="button" data-lang="th" class="px-3 py-1.5 text-xs font-medium rounded [--active:bg:white/10] focus-ring">TH</button>
-            <button type="button" data-lang="en" class="px-3 py-1.5 text-xs font-medium rounded focus-ring">EN</button>
-          </div>
-        </div>
-      </div>
-
-      <nav id="mobile-menu" aria-label="Mobile" class="md:hidden hidden border-t border-white/5 bg-neutral-950/90 backdrop-blur">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 grid gap-2">
-          <a href="#overview" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.overview">Overview</a>
-          <a href="#subjects" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.subjects">Subjects</a>
-          <a href="#curriculum" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.curriculum">Curriculum</a>
-          <a href="#students" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.students">Students</a>
-          <a href="#instructors" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.instructors">Instructors</a>
-          <a href="#more" class="nav-link block rounded-md px-3 py-2 text-sm text-neutral-200 hover:bg-white/5 transition focus-ring" data-i18n="nav.more">More</a>
-          <div class="pt-2">
-            <div id="lang-switch-mobile" class="inline-flex rounded-md border border-white/10 bg-white/5 p-0.5">
-              <button type="button" data-lang="th" class="px-3 py-1.5 text-xs font-medium rounded focus-ring">TH</button>
-              <button type="button" data-lang="en" class="px-3 py-1.5 text-xs font-medium rounded focus-ring">EN</button>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <div id="navbar-placeholder"></div>
 
     <section id="home" class="relative overflow-hidden">
       <div class="absolute inset-0 -z-10">
-        <div class="pointer-events-none absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-pink-500/30 blur-3xl"></div>
-        <div class="pointer-events-none absolute top-40 right-10 h-56 w-56 rounded-full bg-fuchsia-600/20 blur-2xl"></div>
+        <!-- Enhanced hero background elements -->
+        <div class="pointer-events-none absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-gradient-to-r from-pink-500/20 via-fuchsia-600/20 to-pink-500/20 blur-3xl animate-pulse"></div>
+        <div class="pointer-events-none absolute top-40 right-10 h-56 w-56 rounded-full bg-gradient-to-br from-fuchsia-600/15 to-pink-500/15 blur-2xl animate-pulse" style="animation-delay: -2s;"></div>
+        <div class="pointer-events-none absolute bottom-20 left-20 h-40 w-40 rounded-full bg-gradient-to-tr from-pink-500/10 to-fuchsia-600/10 blur-xl animate-pulse" style="animation-delay: -4s;"></div>
+        
+        <!-- Additional floating elements -->
+        <div class="pointer-events-none absolute top-1/4 left-1/4 h-20 w-20 rounded-full bg-pink-400/10 blur-lg animate-bounce" style="animation-delay: -1s; animation-duration: 3s;"></div>
+        <div class="pointer-events-none absolute bottom-1/3 right-1/3 h-16 w-16 rounded-full bg-fuchsia-400/10 blur-lg animate-bounce" style="animation-delay: -2s; animation-duration: 4s;"></div>
       </div>
 
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
@@ -148,7 +399,13 @@
       </div>
     </section>
 
-    <section id="overview" class="py-20 sm:py-28">
+    <section id="overview" class="py-20 sm:py-28 relative overflow-hidden">
+      <!-- Background decoration -->
+      <div class="absolute inset-0 -z-10">
+        <div class="pointer-events-none absolute top-1/2 left-0 h-32 w-32 rounded-full bg-gradient-to-r from-pink-500/5 to-transparent blur-2xl"></div>
+        <div class="pointer-events-none absolute bottom-0 right-0 h-40 w-40 rounded-full bg-gradient-to-l from-fuchsia-600/5 to-transparent blur-2xl"></div>
+      </div>
+      
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-3xl text-center" data-animate="fade-up">
           <h2 class="text-3xl font-bold text-white sm:text-4xl" data-i18n="overview.title">
@@ -160,19 +417,19 @@
         </div>
 
         <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10" data-animate="fade-up">
+          <div class="section-card rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10" data-animate="fade-up">
             <h3 class="text-lg font-semibold text-white" data-i18n="overview.missionTitle">Mission</h3>
             <p class="mt-2 text-sm text-neutral-300" data-i18n="overview.missionBody">
               Develop competent IT professionals with ethical values, innovation mindset, and collaborative skills for the digital economy.
             </p>
           </div>
-          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10" data-animate="fade-up" data-animate-delay="100">
+          <div class="section-card rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10" data-animate="fade-up" data-animate-delay="100">
             <h3 class="text-lg font-semibold text-white" data-i18n="overview.visionTitle">Vision</h3>
             <p class="mt-2 text-sm text-neutral-300" data-i18n="overview.visionBody">
               Be a leading regional hub for applied IT education and technical excellence.
             </p>
           </div>
-          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10" data-animate="fade-up" data-animate-delay="200">
+          <div class="section-card rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10" data-animate="fade-up" data-animate-delay="200">
             <h3 class="text-lg font-semibold text-white" data-i18n="overview.valuesTitle">Values</h3>
             <ul class="mt-2 list-disc pl-5 text-sm text-neutral-300">
               <li data-i18n="overview.values1">Integrity and accountability</li>
@@ -184,7 +441,13 @@
       </div>
     </section>
 
-    <section id="subjects" class="py-20 sm:py-28">
+    <section id="subjects" class="py-20 sm:py-28 relative overflow-hidden">
+      <!-- Background decoration -->
+      <div class="absolute inset-0 -z-10">
+        <div class="pointer-events-none absolute top-0 left-1/2 h-24 w-24 rounded-full bg-gradient-to-b from-pink-500/5 to-transparent blur-xl"></div>
+        <div class="pointer-events-none absolute bottom-1/4 right-1/4 h-20 w-20 rounded-full bg-gradient-to-t from-fuchsia-600/5 to-transparent blur-xl"></div>
+      </div>
+      
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-3xl text-center" data-animate="fade-up">
           <h2 class="text-3xl font-bold text-white sm:text-4xl" data-i18n="subjects.title">Subjects Offered</h2>
@@ -300,7 +563,6 @@
           </div>
         </div>
 
-         Semester timeline 
           <div class="mt-12 rounded-2xl border border-white/10 bg-gradient-to-br from-neutral-900 to-neutral-800 p-6">
           <ol class="relative ml-3 border-l border-white/10 pl-6">
             <li class="mb-8" data-animate="fade-up">
@@ -372,8 +634,6 @@
             </div>
           </div>
         </div>
-
-         Note: You can adjust data-count values above as needed 
       </div>
     </section>
 
@@ -416,7 +676,6 @@
           </div>
         </div>
 
-         CTA Banner 
           <div class="mt-12 overflow-hidden rounded-2xl border border-pink-500/30 bg-gradient-to-br from-pink-500/10 to-fuchsia-600/10 p-8 ring-1 ring-inset ring-pink-500/20" data-animate="fade-up">
           <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
             <div>
@@ -433,16 +692,7 @@
       </div>
     </section>
 
-    <footer class="border-t border-white/10 py-10">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col-reverse items-center justify-between gap-6 sm:flex-row">
-        <p class="text-xs text-neutral-400">
-          © <span id="year"></span> <span data-i18n="footer.brand">Loei Technical College — IT Department</span>. <span data-i18n="footer.rights">All rights reserved.</span>
-        </p>
-        <div class="flex items-center gap-3">
-          <a href="#home" class="focus-ring inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-neutral-200 hover:bg-white/10 transition" data-i18n="footer.backToTop">Back to top</a>
-        </div>
-      </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <button
       id="toTop"
@@ -455,7 +705,37 @@
 
     <script>
       (function () {
+        async function loadComponent(selector, url) {
+          const host = document.querySelector(selector);
+          if (!host) return null;
+          const res = await fetch(url, { cache: 'no-cache' });
+          const html = await res.text();
+          host.innerHTML = html;
+          return host;
+        }
+
+        function initUI() {
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+          // Hide-on-scroll navbar
+          const headerEl = document.querySelector('header');
+          let lastY = window.scrollY || 0;
+          let ticking = false;
+          function onScroll() {
+            const y = window.scrollY || 0;
+            const delta = y - lastY;
+            const isDown = delta > 5 && y > 100; // Increased threshold for better UX
+            if (headerEl) {
+              headerEl.style.transform = isDown ? 'translateY(-100%)' : 'translateY(0)';
+            }
+            lastY = y;
+            ticking = false;
+          }
+          window.addEventListener('scroll', () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(onScroll);
+          }, { passive: true });
 
         // Mobile menu toggle
         const menuBtn = document.getElementById('mobile-menu-button');
@@ -487,7 +767,8 @@
         toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
         // Year in footer
-        document.getElementById('year').textContent = String(new Date().getFullYear());
+          const yearEl = document.getElementById('year');
+          if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
         // Animation presets (initial and visible transforms)
         const presets = {
@@ -576,6 +857,43 @@
         }, { threshold: 0.6 });
 
         counters.forEach((c) => counterObserver.observe(c));
+
+        // Parallax scrolling effect for background elements
+        function initParallax() {
+          const parallaxElements = document.querySelectorAll('.particle, .glow-orb');
+          
+          window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            parallaxElements.forEach((el, index) => {
+              const speed = 0.1 + (index * 0.05);
+              el.style.transform = `translateY(${rate * speed}px)`;
+            });
+          });
+        }
+
+        // Mouse movement effect for floating particles
+        function initMouseParallax() {
+          const particles = document.querySelectorAll('.particle');
+          
+          document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            particles.forEach((particle, index) => {
+              const speed = 0.5 + (index * 0.2);
+              const x = (mouseX - 0.5) * speed * 50;
+              const y = (mouseY - 0.5) * speed * 50;
+              
+              particle.style.transform += ` translate(${x}px, ${y}px)`;
+            });
+          });
+        }
+
+        // Initialize parallax effects
+        initParallax();
+        initMouseParallax();
 
         // Scroll spy for nav links
         const sections = ['overview', 'subjects', 'curriculum', 'students', 'instructors', 'more']
@@ -708,29 +1026,39 @@
             'cta.visitBody': 'Schedule a tour, meet our instructors, and explore labs and student projects.',
             'cta.learnMore': 'Learn More',
             'footer.brand': 'Loei Technical College — IT Department',
-            'footer.rights': 'All rights reserved.',
-            'footer.backToTop': 'Back to top'
+            'footer.rights': 'All rights reserved',
+            'footer.backToTop': 'Back to top',
+            'footer.description': 'Empowering students with cutting-edge technology education and practical skills for the digital future',
+            'footer.quickLinks': 'Quick Links',
+            'footer.contact': 'Contact Info',
+            'footer.officeHours': 'Office Hours',
+            'footer.weekdays': 'Weekdays',
+            'footer.saturday': 'Saturday',
+            'footer.sunday': 'Sunday',
+            'footer.closed': 'Closed',
+            'footer.privacy': 'Privacy Policy',
+            'footer.terms': 'Terms of Service'
           },
           th: {
             'brand.college': 'วิทยาลัยเทคนิคเลย',
             'brand.department': 'แผนกวิชาเทคโนโลยีสารสนเทศ',
-            'a11y.goHome': 'ไปที่หน้าหลัก',
-            'a11y.openMenu': 'เปิดเมนูหลัก',
             'nav.overview': 'ภาพรวม',
-            'nav.subjects': 'รายวิชา',
-            'nav.curriculum': 'โครงสร้างหลักสูตร',
+            'nav.subjects': 'วิชา',
+            'nav.curriculum': 'หลักสูตร',
             'nav.students': 'นักเรียน',
             'nav.instructors': 'ครูผู้สอน',
-            'nav.more': 'ข้อมูลอื่น ๆ',
+            'nav.more': 'เพิ่มเติม',
+            'a11y.goHome': 'ไปหน้าแรก',
+            'a11y.openMenu': 'เปิดเมนูหลัก',
             'hero.badgeLeft': 'ทักษะพร้อมอนาคต',
             'hero.badgeRight': 'หลักสูตรเน้นอุตสาหกรรม',
-            'hero.title1': 'แผนกเทคโนโลยีสารสนเทศ',
+            'hero.title1': 'แผนกวิชาเทคโนโลยีสารสนเทศ',
             'hero.title2': 'วิทยาลัยเทคนิคเลย',
-            'hero.lead': 'วางรากฐานที่แข็งแกร่งด้านพัฒนาซอฟต์แวร์ เครือข่าย ความมั่นคงปลอดภัยไซเบอร์ และนวัตกรรมดิจิทัล ผ่านการปฏิบัติจริงและโครงงาน',
+            'hero.lead': 'สร้างรากฐานที่แข็งแกร่งด้านการพัฒนาซอฟต์แวร์ เครือข่าย ความมั่นคงปลอดภัยไซเบอร์ และนวัตกรรมดิจิทัล ด้วยแนวทางปฏิบัติจริงและโครงงาน',
             'cta.explore': 'สำรวจแผนกวิชา',
-            'cta.subjects': 'รายวิชาที่เปิดสอน',
-            'overview.title': 'ภาพรวมแผนกเทคโนโลยีสารสนเทศ',
-            'overview.body': 'แผนกเทคโนโลยีสารสนเทศมุ่งพัฒนาผู้เรียนให้มีสมรรถนะด้านการเขียนโปรแกรม การดูแลเครือข่าย การวิเคราะห์ระบบ และความปลอดภัยสารสนเทศ โดยผสานความเข้มข้นทางวิชาการกับการปฏิบัติจริงเพื่อพร้อมทำงาน',
+            'cta.subjects': 'วิชาที่เปิดสอน',
+            'overview.title': 'ภาพรวมแผนกวิชาเทคโนโลยีสารสนเทศ',
+            'overview.body': 'แผนกวิชาเทคโนโลยีสารสนเทศที่วิทยาลัยเทคนิคเลยเตรียมผู้เรียนให้มีสมรรถนะด้านการเขียนโปรแกรม การดูแลเครือข่าย การวิเคราะห์ระบบ และความปลอดภัยสารสนเทศ ครูผู้สอนของเรารวมความเข้มข้นทางวิชาการกับการปฏิบัติจริง เพื่อให้ผู้สำเร็จการศึกษาพร้อมทำงานและปรับตัวได้',
             'overview.missionTitle': 'พันธกิจ',
             'overview.missionBody': 'พัฒนาบุคลากรไอทีให้มีความสามารถ คุณธรรม ความคิดสร้างสรรค์ และทักษะการทำงานร่วมกันสำหรับเศรษฐกิจดิจิทัล',
             'overview.visionTitle': 'วิสัยทัศน์',
@@ -739,8 +1067,8 @@
             'overview.values1': 'ซื่อสัตย์และรับผิดชอบ',
             'overview.values2': 'เรียนรู้อย่างต่อเนื่อง',
             'overview.values3': 'สร้างผลกระทบต่อชุมชน',
-            'subjects.title': 'รายวิชาที่เปิดสอน',
-            'subjects.body': 'ผสมผสานวิชาแกนและวิชาเลือกอย่างเหมาะสม เพื่อสร้างความกว้างและความลึกในสาขาไอที',
+            'subjects.title': 'วิชาที่เปิดสอน',
+            'subjects.body': 'การผสมผสานวิชาแกนและวิชาเลือกอย่างเหมาะสม เพื่อสร้างความกว้างและความลึกในสาขาไอที',
             'subjects.programming': 'การเขียนโปรแกรม',
             'subjects.core': 'วิชาแกน',
             'subjects.programming1': 'พื้นฐาน Python, C/C#, Java',
@@ -768,7 +1096,7 @@
             'subjects.multimedia2': 'ไมโครคอนโทรลเลอร์และเซนเซอร์',
             'subjects.multimedia3': 'โครงงานต้นแบบ',
             'curriculum.title': 'โครงสร้างหลักสูตร',
-            'curriculum.body': 'เรียนรู้อย่างเป็นลำดับตั้งแต่พื้นฐานสู่การเชี่ยวชาญ พร้อมห้องปฏิบัติการ โครงงาน และสหกิจศึกษา',
+            'curriculum.body': 'การเรียนรู้อย่างเป็นลำดับตั้งแต่พื้นฐานสู่การเชี่ยวชาญ พร้อมห้องปฏิบัติการ โครงงาน และสหกิจศึกษา',
             'curriculum.year1': 'ปีที่ 1 — พื้นฐาน',
             'curriculum.y1_1': 'แนะนำไอทีและระบบคอมพิวเตอร์',
             'curriculum.y1_2': 'พื้นฐานการเขียนโปรแกรมและเว็บ',
@@ -815,9 +1143,19 @@
             'cta.visit': 'เยี่ยมชมแผนกของเรา',
             'cta.visitBody': 'นัดเยี่ยมชม พบครูผู้สอน และสำรวจห้องแลบกับผลงานนักเรียน',
             'cta.learnMore': 'ดูเพิ่มเติม',
-            'footer.brand': 'วิทยาลัยเทคนิคเลย — แผนกเทคโนโลยีสารสนเทศ',
-            'footer.rights': 'สงวนลิขสิทธิ์ทั้งหมด',
-            'footer.backToTop': 'กลับไปด้านบน'
+            'footer.brand': 'วิทยาลัยเทคนิคเลย — แผนกวิชาเทคโนโลยีสารสนเทศ',
+            'footer.rights': 'สงวนลิขสิทธิ์',
+            'footer.backToTop': 'กลับขึ้นบน',
+            'footer.description': 'เสริมสร้างนักเรียนด้วยการศึกษาด้านเทคโนโลยีที่ทันสมัยและทักษะการปฏิบัติสำหรับอนาคตดิจิทัล',
+            'footer.quickLinks': 'ลิงก์ด่วน',
+            'footer.contact': 'ข้อมูลติดต่อ',
+            'footer.officeHours': 'เวลาทำการ',
+            'footer.weekdays': 'วันธรรมดา',
+            'footer.saturday': 'วันเสาร์',
+            'footer.sunday': 'วันอาทิตย์',
+            'footer.closed': 'ปิดทำการ',
+            'footer.privacy': 'นโยบายความเป็นส่วนตัว',
+            'footer.terms': 'เงื่อนไขการใช้งาน'
           }
         };
 
@@ -851,6 +1189,9 @@
           localStorage.setItem('lang', next);
           applyTranslations(next);
           syncActiveButtons(next);
+          
+          // Dispatch custom event for components to listen to
+          document.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: next } }));
         }
 
         function attachLangSwitch(id) {
@@ -866,10 +1207,60 @@
           });
         }
 
+        // Function to re-apply translations after components are loaded
+        function reapplyTranslations() {
+          const savedLang = localStorage.getItem('lang') || 'th';
+          applyTranslations(savedLang);
+          syncActiveButtons(savedLang);
+        }
+
+        // Listen for language changes and reapply to new components
+        document.addEventListener('languageChanged', reapplyTranslations);
+
+        // MutationObserver to detect when new components are added and apply translations
+        const observer = new MutationObserver((mutations) => {
+          let shouldReapply = false;
+          mutations.forEach((mutation) => {
+            if (mutation.type === 'childList') {
+              mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                  // Check if the added element or its children have data-i18n attributes
+                  if (node.hasAttribute('data-i18n') || node.querySelector('[data-i18n]')) {
+                    shouldReapply = true;
+                  }
+                }
+              });
+            }
+          });
+          
+          if (shouldReapply) {
+            // Small delay to ensure DOM is fully updated
+            setTimeout(reapplyTranslations, 100);
+          }
+        });
+
+        // Start observing the document for changes
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+
         attachLangSwitch('lang-switch');
         attachLangSwitch('lang-switch-mobile');
         const savedLang = localStorage.getItem('lang') || 'th';
         setLang(savedLang);
+        }
+
+        // Load navbar and footer, then init
+        Promise.all([
+          loadComponent('#navbar-placeholder', 'components/navbar.html'),
+          loadComponent('#footer-placeholder', 'components/footer.html'),
+        ]).then(() => {
+          initUI();
+          // Re-apply language after components are in DOM
+          const savedLang = localStorage.getItem('lang') || 'th';
+          reapplyTranslations();
+        });
       })();
     </script>
   </body>
